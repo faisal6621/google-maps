@@ -7,8 +7,17 @@ function initMap() {
 	  center: {lat: 28.6024018, lng: 77.3629686},
 	  mapTypeId: google.maps.MapTypeId.TERRAIN
 	});
+	var rectangle = new google.maps.Rectangle({
+				    strokeColor: '#FF0000',
+				    strokeOpacity: 0.8,
+				    strokeWeight: 2,
+				    //fillColor: '#FF0000',
+				    fillOpacity: 0,
+				    map: map,
+				    bounds: new google.maps.LatLngBounds(new google.maps.LatLng(28.5453081, 77.2961997), new google.maps.LatLng(28.6357632, 77.3925362))
+				});
+
 	polyShape = [];
-	var myMap = new google.maps.Map(document.getElementById("map"), map);
 	var poly = new google.maps.Polygon({
 		  //path: polyShape,
 		  strokeColor: '#FF0000',
@@ -18,7 +27,7 @@ function initMap() {
 		  fillOpacity: 0.30,
 		  map: map
 		});
-	google.maps.event.addListener(myMap, 'click', function (e) {
+	google.maps.event.addListener(map, 'click', function (e) {
 		var loc = {lat: e.latLng.lat(), lng: e.latLng.lng()};
 		polyShape.push(loc);
 		sessionStorage.polyShape = JSON.stringify(polyShape);
